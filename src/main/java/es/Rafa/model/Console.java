@@ -4,7 +4,7 @@ public class Console {
 
 	private Integer id;
 	private String name;
-	private String codCompany;
+	private Integer codCompany;
 
 	public Integer getId() {
 		return id;
@@ -22,11 +22,11 @@ public class Console {
 		this.name = name;
 	}
 
-	public String getCodCompany() {
+	public Integer getCodCompany() {
 		return codCompany;
 	}
 
-	public void setCodCompany(String codCompany) {
+	public void setCodCompany(Integer codCompany) {
 		this.codCompany = codCompany;
 	}
 
