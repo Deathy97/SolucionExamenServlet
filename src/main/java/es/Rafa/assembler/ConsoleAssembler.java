@@ -7,7 +7,7 @@ import es.Rafa.model.Console;
 public class ConsoleAssembler {
 
 	
-	public static Console assembleUserFrom(HttpServletRequest request) {
+	public static Console assembleConsoleFrom(HttpServletRequest request) {
 		
 		Console console = new Console();
 		console.setName(request.getParameter("name")); 

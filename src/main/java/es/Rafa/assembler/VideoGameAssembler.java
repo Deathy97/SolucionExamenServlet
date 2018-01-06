@@ -8,7 +8,7 @@ import es.Rafa.model.VideoGame;
 
 public class VideoGameAssembler {
 
-	public static VideoGame assembleUserFrom(HttpServletRequest request) {
+	public static VideoGame assembleVideoGameFrom(HttpServletRequest request) {
 
 		VideoGame videoGame = new VideoGame();
 		videoGame.setPegi(Integer.parseInt(request.getParameter("pegi")));
