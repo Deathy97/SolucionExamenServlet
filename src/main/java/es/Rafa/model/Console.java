@@ -2,17 +2,8 @@ package es.Rafa.model;
 
 public class Console {
 
-	private Integer id;
 	private String name;
 	private Integer codCompany;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;
