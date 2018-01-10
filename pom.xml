@@ -67,23 +67,23 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+<!--  
+		 https://mvnrepository.com/artifact/org.springframework/spring-core 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+		https://mvnrepository.com/artifact/org.springframework/spring-context 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
+		https://mvnrepository.com/artifact/org.springframework/spring-beans 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
 		</dependency>
-
+-->
 	</dependencies>
 
 	<build>
@@ -104,12 +104,12 @@
 				</configuration>
 			</plugin>
 			
-            <!-- Package as an executable jar/war -->
+       <!-- 
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
+-->
 			<plugin>
 				<groupId>org.zeroturnaround</groupId>
 				<artifactId>jrebel-maven-plugin</artifactId>
