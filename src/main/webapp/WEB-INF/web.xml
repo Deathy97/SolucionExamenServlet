@@ -11,7 +11,7 @@
 
 	<servlet-mapping>
 		<servlet-name>ConsoleServlet</servlet-name>
-		<url-pattern>/console</url-pattern>
+		<url-pattern>console</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -21,7 +21,7 @@
 
 	<servlet-mapping>
 		<servlet-name>VideoGameServlet</servlet-name>
-		<url-pattern>/videogame</url-pattern>
+		<url-pattern>videogame</url-pattern>
 	</servlet-mapping>
 	<!-- <servlet> <servlet-name>DeleteServlet</servlet-name> <servlet-class>es.salesianos.servlet.DeleteServlet</servlet-class> 
 		</servlet> <servlet-mapping> <servlet-name>DeleteServlet</servlet-name> <url-pattern>/delete</url-pattern> 
@@ -34,7 +34,7 @@
 
 	<servlet-mapping>
 		<servlet-name>ListUserServlet</servlet-name>
-		<url-pattern>/cargarListado</url-pattern>
+		<url-pattern>cargarListado</url-pattern>
 	</servlet-mapping>
 	<!-- <welcome-file-list> <welcome-file>login.jsp</welcome-file> </welcome-file-list> -->
 
