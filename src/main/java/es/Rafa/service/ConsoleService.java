@@ -12,7 +12,6 @@ public class ConsoleService {
 
 	public void createNewConsoleFromRequest(HttpServletRequest req) {
 		Console console = ConsoleAssembler.assembleConsoleFrom(req);
-
 		insertOrUpdate(console);
 	}
 
