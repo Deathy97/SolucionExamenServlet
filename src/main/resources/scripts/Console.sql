@@ -1,5 +1,4 @@
 create table IF NOT EXISTS USER(
-	tittle varchar(25) PRIMARY KEY,
-	pegi int,
-	releaseDate date
+	name varchar(25) PRIMARY KEY,
+	codCompany int
 );
