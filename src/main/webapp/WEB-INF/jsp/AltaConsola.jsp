@@ -8,7 +8,7 @@
 </head>
 <body>
 <body>
-	<form action="" method="post">
+	<form action="console" method="post">
 		<span>name:</span> 
 		<input type="text" path="name"/> <br/>
 		<span>codCompany:</span> 

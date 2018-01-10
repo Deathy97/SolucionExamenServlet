@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import es.Rafa.service.VideoGameService;
 
-public class VideoGamesServlet extends HttpServlet{
+public class VideoGamesServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
 	
 	VideoGameService service = new VideoGameService();
-	
+
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doAction(req, resp);
 	}
@@ -22,14 +24,14 @@ public class VideoGamesServlet extends HttpServlet{
 	}
 
 	private void doAction(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		service.createNewVideoGameFromRequest(req);;
+		service.createNewVideoGameFromRequest(req);
+		;
 		redirect(req, resp);
 	}
-	
 
 	protected void redirect(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/VideoGameList.jsp");
-		dispatcher.forward(req,resp);
+		dispatcher.forward(req, resp);
 	}
 
 	public VideoGameService getService() {
@@ -39,7 +41,5 @@ public class VideoGamesServlet extends HttpServlet{
 	public void setService(VideoGameService service) {
 		this.service = service;
 	}
-
-	
 
 }
