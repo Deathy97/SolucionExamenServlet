@@ -6,7 +6,7 @@ private ConsoleService service = new ConsoleService();
 	
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		User user = service.assembleUserFromRequest(req);
+		Console console = service.assembleUserFromRequest(req);
 		service.insertOrUpdate(user);
 		service.calculateAgeAndAddIntoRequest(req, user.getDateOfBirth());
 		redirect(req,resp);
