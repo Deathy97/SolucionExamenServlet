@@ -8,11 +8,11 @@
 </head>
 <body>
 <body>
-	<form action="console" method="get">
+	<form action="console" method="post">
 		<span>name:</span> 
-		<input type="text" path="name"/> <br/>
+		<input type="text" name="name"/> <br/>
 		<span>codCompany:</span> 
-		<input type="text" path="codCompany"/><br/>
+		<input type="text" name="codCompany"/><br/>
 		<input type="submit"/>
 	</form>
 </body>
