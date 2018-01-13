@@ -7,13 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="" method="post">
-		<span>tittle:</span> 
-		<input type="text" path="tittle"/> <br/>
+	<form action="videogame" method="post">
+		<span>title:</span> 
+		<input type="text" name="title"/> <br/>
 		<span>pegi:</span> 
-		<input type="text" path="pegi"/><br/>
+		<input type="text" name="pegi"/><br/>
 		<span>releaseDate:</span> 
-		<input type="date" path="releaseDate"/><br/>
+		<input type="date" name="releaseDate"/><br/>
 		<input type="submit"/>
 	</form>
 </body>

@@ -25,7 +25,6 @@ public class VideoGamesServlet extends HttpServlet {
 
 	private void doAction(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		service.createNewVideoGameFromRequest(req);
-		;
 		redirect(req, resp);
 	}
 

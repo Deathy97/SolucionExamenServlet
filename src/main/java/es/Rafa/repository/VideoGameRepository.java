@@ -35,8 +35,8 @@ public class VideoGameRepository {
 		Connection conn = connection.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = conn.prepareStatement("INSERT INTO GAME (tittle,pegi,releaseDate)" + "VALUES (?, ?,?)");
-			preparedStatement.setString(1, gameForm.getTittle());
+			preparedStatement = conn.prepareStatement("INSERT INTO GAME (title,pegi,releaseDate)" + "VALUES (?, ?, ?)");
+			preparedStatement.setString(1, gameForm.getTitle());
 			preparedStatement.setInt(2, gameForm.getPegi());
 			preparedStatement.setDate(3, gameForm.getReleaseDate());
 			preparedStatement.executeUpdate();
@@ -49,7 +49,7 @@ public class VideoGameRepository {
 
 		connection.close(conn);
 	}
-	
+
 	public void update(VideoGame videoGame) {
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
@@ -57,14 +57,11 @@ public class VideoGameRepository {
 		try {
 			conn = connection.open(jdbcUrl);
 			preparedStatement = conn
-					.prepareStatement("UPDATE GAME SET " + "tittle = ?, pegi = ?, releaseDate = ? WHERE tittle = ?");
-			preparedStatement.setString(1, videoGame.getTittle());
+					.prepareStatement("UPDATE GAME SET " + "title = ?, pegi = ?, releaseDate = ? WHERE title = ?");
+			preparedStatement.setString(1, videoGame.getTitle());
 			preparedStatement.setInt(2, videoGame.getPegi());
 			preparedStatement.setDate(3, videoGame.getReleaseDate());
 			preparedStatement.executeUpdate();
-
-			// System.out.println("UPDATE CONSOLE SET " + "nombre = ?, apellido = ? WHERE
-			// dni = ?");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,22 +71,22 @@ public class VideoGameRepository {
 			connection.close(conn);
 		}
 	}
-	
+
 	public VideoGame search(VideoGame gameForm) {
 		VideoGame videoGameInDatabase = null;
 		ResultSet resultSet = null;
 		PreparedStatement prepareStatement = null;
 		Connection conn = connection.open(jdbcUrl);
 		try {
-			prepareStatement = conn.prepareStatement("SELECT * FROM GAME WHERE tittle = ?");
-			prepareStatement.setString(1, gameForm.getTittle());
+			prepareStatement = conn.prepareStatement("SELECT * FROM GAME WHERE title = ?");
+			prepareStatement.setString(1, gameForm.getTitle());
 			resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
 				videoGameInDatabase = new VideoGame();
-				videoGameInDatabase.setTittle(resultSet.getString(0));
+				videoGameInDatabase.setTitle(resultSet.getString(0));
 				videoGameInDatabase.setPegi(resultSet.getInt(2));
 				videoGameInDatabase.setReleaseDate(resultSet.getDate(3));
-				
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -102,7 +99,7 @@ public class VideoGameRepository {
 		connection.close(conn);
 		return videoGameInDatabase;
 	}
-	
+
 	private void close(PreparedStatement prepareStatement) {
 		try {
 			prepareStatement.close();
@@ -120,6 +117,5 @@ public class VideoGameRepository {
 			throw new RuntimeException(e);
 		}
 	}
-
 
 }

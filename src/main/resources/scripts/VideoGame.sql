@@ -1,5 +1,5 @@
-create table IF NOT EXISTS USER(
-	tittle varchar(25) PRIMARY KEY,
+create table IF NOT EXISTS GAME(
+	title varchar(25) PRIMARY KEY,
 	pegi int,
 	releaseDate date
 );

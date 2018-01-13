@@ -11,17 +11,16 @@ public class VideoGameService {
 	private VideoGameRepository repository = new VideoGameRepository();
 
 	public void createNewVideoGameFromRequest(HttpServletRequest req) {
-		VideoGame videoGame = VideoGameAssembler.assembleVideoGameFrom(req);
-
+		VideoGame videoGame = VideoGameAssembler.assembleVideoGameForm(req);
 		insertOrUpdate(videoGame);
 	}
 
-	public void insertOrUpdate(VideoGame videoGameFrom) {
-		VideoGame videoGameInDatabase = repository.search(videoGameFrom);
+	public void insertOrUpdate(VideoGame videoGameForm) {
+		VideoGame videoGameInDatabase = repository.search(videoGameForm);
 		if (null == videoGameInDatabase) {
-			repository.insert(videoGameFrom);
+			repository.insert(videoGameForm);
 		} else {
-			repository.update(videoGameFrom);
+			repository.update(videoGameForm);
 		}
 	}
 

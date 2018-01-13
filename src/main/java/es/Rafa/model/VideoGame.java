@@ -8,11 +8,11 @@ public class VideoGame {
 	private Integer pegi;
 	private Date releaseDate;
 
-	public String getTittle() {
+	public String getTitle() {
 		return title;
 	}
 
-	public void setTittle(String title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
