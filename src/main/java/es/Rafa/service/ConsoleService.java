@@ -1,9 +1,12 @@
 package es.Rafa.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import es.Rafa.assembler.ConsoleAssembler;
 import es.Rafa.model.Console;
+import es.Rafa.model.VideoGame;
 import es.Rafa.repository.ConsoleRepository;
 
 public class ConsoleService {
@@ -24,6 +27,11 @@ public class ConsoleService {
 		}
 	}
 
+	public List<Console> listAllConsoles(){
+		return repository.searchAll();
+		
+	}
+	
 	public ConsoleRepository getRepository() {
 		return repository;
 	}

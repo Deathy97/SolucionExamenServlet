@@ -27,7 +27,7 @@ public class VideoGameService {
 	}
 	
 	public List<VideoGame> listAllVideoGames(){
-		return null;
+		return repository.searchAll();
 		
 	}
 	

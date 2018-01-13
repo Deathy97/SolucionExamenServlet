@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Optional;
-
+import java.util.ArrayList;
+import java.util.List;
 import es.Rafa.connection.AbstractConnection;
 import es.Rafa.model.Console;
 
@@ -30,6 +30,7 @@ public class ConsoleRepository {
 	};
 
 	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/Console.sql'";
+
 	public Console search(Console consoleForm) {
 		Console consoleInDatabase = null;
 		ResultSet resultSet = null;
@@ -57,16 +58,6 @@ public class ConsoleRepository {
 		return consoleInDatabase;
 	}
 
-	private void close(PreparedStatement prepareStatement) {
-		try {
-			prepareStatement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-	}
-	
-	
 	public void insert(Console consoleForm) {
 		Connection conn = connection.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
@@ -97,7 +88,6 @@ public class ConsoleRepository {
 			preparedStatement.setInt(2, console.getCodCompany());
 			preparedStatement.executeUpdate();
 
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -107,7 +97,42 @@ public class ConsoleRepository {
 		}
 	}
 
-	
+	public List<Console> searchAll() {
+		List<Console> listGames = new ArrayList<Console>();
+		Connection conn = connection.open(jdbcUrl);
+		ResultSet resultSet = null;
+		PreparedStatement prepareStatement = null;
+		try {
+			prepareStatement = conn.prepareStatement("SELECT * FROM CONSOLE");
+			resultSet = prepareStatement.executeQuery();
+			while (resultSet.next()) {
+				Console consoleInDatabase = new Console();
+				consoleInDatabase.setName(resultSet.getString(0));
+				consoleInDatabase.setCodCompany(resultSet.getInt(1));
+
+				listGames.add(consoleInDatabase);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			close(resultSet);
+			close(prepareStatement);
+		}
+
+		connection.close(conn);
+		return listGames;
+	}
+
+	private void close(PreparedStatement prepareStatement) {
+		try {
+			prepareStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
 
 	private void close(ResultSet resultSet) {
 		try {
