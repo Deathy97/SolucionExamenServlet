@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
+import java.util.List;
 import es.Rafa.connection.AbstractConnection;
-import es.Rafa.model.Console;
 import es.Rafa.model.VideoGame;
 
 public class VideoGameRepository {
@@ -98,6 +98,35 @@ public class VideoGameRepository {
 		}
 		connection.close(conn);
 		return videoGameInDatabase;
+	}
+
+	public List<VideoGame> searchAll() {
+		List<VideoGame> listGames = new ArrayList<VideoGame>();
+		Connection conn = connection.open(jdbcUrl);
+		ResultSet resultSet = null;
+		PreparedStatement prepareStatement = null;
+		try {
+			prepareStatement = conn.prepareStatement("SELECT * FROM GAME");
+			resultSet = prepareStatement.executeQuery();
+			while (resultSet.next()) {
+				VideoGame videoGameInDatabase = new VideoGame();
+				videoGameInDatabase.setTitle(resultSet.getString(0));
+				videoGameInDatabase.setPegi(resultSet.getInt(2));
+				videoGameInDatabase.setReleaseDate(resultSet.getDate(3));
+
+				listGames.add(videoGameInDatabase);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			close(resultSet);
+			close(prepareStatement);
+		}
+
+		connection.close(conn);
+		return listGames;
 	}
 
 	private void close(PreparedStatement prepareStatement) {
