@@ -4,16 +4,16 @@ import java.sql.Date;
 
 public class VideoGame {
 
-	private String tittle;
+	private String title;
 	private Integer pegi;
 	private Date releaseDate;
 
 	public String getTittle() {
-		return tittle;
+		return title;
 	}
 
-	public void setTittle(String tittle) {
-		this.tittle = tittle;
+	public void setTittle(String title) {
+		this.title = title;
 	}
 
 	public Integer getPegi() {

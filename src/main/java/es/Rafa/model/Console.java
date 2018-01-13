@@ -3,7 +3,7 @@ package es.Rafa.model;
 public class Console {
 
 	private String name;
-	private int codCompany;
+	private Integer codCompany;
 
 	public String getName() {
 		return name;
@@ -13,11 +13,11 @@ public class Console {
 		this.name = name;
 	}
 
-	public int getCodCompany() {
+	public Integer getCodCompany() {
 		return codCompany;
 	}
 
-	public void setCodCompany(int codCompany) {
+	public void setCodCompany(Integer codCompany) {
 		this.codCompany = codCompany;
 	}
 
