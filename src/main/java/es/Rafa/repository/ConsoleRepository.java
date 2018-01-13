@@ -30,7 +30,43 @@ public class ConsoleRepository {
 	};
 
 	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/Console.sql'";
+	public Console search(Console consoleForm) {
+		Console consoleInDatabase = null;
+		ResultSet resultSet = null;
+		PreparedStatement prepareStatement = null;
+		Connection conn = null;
+		try {
+			conn = connection.open(jdbcUrl);
+			prepareStatement = conn.prepareStatement("SELECT * FROM CONSOLE WHERE name = ?");
+			prepareStatement.setString(1, consoleForm.getName());
+			resultSet = prepareStatement.executeQuery();
+			while (resultSet.next()) {
+				consoleInDatabase = new Console();
+				consoleInDatabase.setName(resultSet.getString(0));
+				consoleInDatabase.setCodCompany(resultSet.getInt(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			close(resultSet);
+			close(prepareStatement);
 
+		}
+		connection.close(conn);
+		return consoleInDatabase;
+	}
+
+	private void close(PreparedStatement prepareStatement) {
+		try {
+			prepareStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+	
+	
 	public void insert(Console consoleForm) {
 		Connection conn = connection.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
@@ -61,8 +97,6 @@ public class ConsoleRepository {
 			preparedStatement.setInt(2, console.getCodCompany());
 			preparedStatement.executeUpdate();
 
-			// System.out.println("UPDATE CONSOLE SET " + "nombre = ?, apellido = ? WHERE
-			// dni = ?");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,40 +107,7 @@ public class ConsoleRepository {
 		}
 	}
 
-	public Console search(Console consoleForm) {
-		Console consoleInDatabase = null;
-		ResultSet resultSet = null;
-		PreparedStatement prepareStatement = null;
-		Connection conn = connection.open(jdbcUrl);
-		try {
-			prepareStatement = conn.prepareStatement("SELECT * FROM CONSOLE WHERE name = ?");
-			prepareStatement.setString(1, consoleForm.getName());
-			resultSet = prepareStatement.executeQuery();
-			while (resultSet.next()) {
-				consoleInDatabase = new Console();
-				consoleInDatabase.setName(resultSet.getString(0));
-				consoleInDatabase.setCodCompany(resultSet.getInt(2));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			close(resultSet);
-			close(prepareStatement);
-
-		}
-		connection.close(conn);
-		return consoleInDatabase;
-	}
-
-	private void close(PreparedStatement prepareStatement) {
-		try {
-			prepareStatement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-	}
+	
 
 	private void close(ResultSet resultSet) {
 		try {
