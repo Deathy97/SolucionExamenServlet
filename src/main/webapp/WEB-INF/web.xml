@@ -4,25 +4,46 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	version="3.1">
 	<display-name>Archetype Created Web Application</display-name>
-	
+
 	<servlet>
 		<servlet-name>ConsoleServlet</servlet-name>
 		<servlet-class>es.Rafa.servlet.ConsoleServlet</servlet-class>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>ConsoleServlet</servlet-name>
 		<url-pattern>console</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>VideoGamesServlet</servlet-name>
 		<servlet-class>es.Rafa.servlet.VideoGamesServlet</servlet-class>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>VideoGamesServlet</servlet-name>
 		<url-pattern>videogame</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>VideoGameDataListServlet</servlet-name>
+		<servlet-class>es.Rafa.servlet.VideoGameDataListServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>VideoGameDataListServlet</servlet-name>
+		<url-pattern>dataGames</url-pattern>
+	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>ConsoleDataListServlet</servlet-name>
+		<servlet-class>es.Rafa.servlet.ConsoleDataListServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ConsoleDataListServlet</servlet-name>
+		<url-pattern>dataConsoles</url-pattern>
+	</servlet-mapping>
+
+
 </web-app>

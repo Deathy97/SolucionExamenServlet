@@ -107,8 +107,8 @@ public class ConsoleRepository {
 			resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
 				Console consoleInDatabase = new Console();
-				consoleInDatabase.setName(resultSet.getString(0));
-				consoleInDatabase.setCodCompany(resultSet.getInt(1));
+				consoleInDatabase.setName(resultSet.getString(1));
+				consoleInDatabase.setCodCompany(resultSet.getInt(2));
 
 				listGames.add(consoleInDatabase);
 			}

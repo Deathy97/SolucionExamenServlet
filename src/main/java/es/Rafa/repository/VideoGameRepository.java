@@ -110,7 +110,7 @@ public class VideoGameRepository {
 			resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
 				VideoGame videoGameInDatabase = new VideoGame();
-				videoGameInDatabase.setTitle(resultSet.getString(0));
+				videoGameInDatabase.setTitle(resultSet.getString(1));
 				videoGameInDatabase.setPegi(resultSet.getInt(2));
 				videoGameInDatabase.setReleaseDate(resultSet.getDate(3));
 
