@@ -14,12 +14,12 @@ import es.Rafa.service.VideoGameService;
 
 public class VideoGameDataListServlet extends HttpServlet{
 	
-	private VideoGameService servicio = new VideoGameService();
+	private VideoGameService service = new VideoGameService();
 	private static final long serialVersionUID = 1L;
 
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<VideoGame> listAllVideoGames = servicio.listAllVideoGames();
+		List<VideoGame> listAllVideoGames = service.listAllVideoGames();
 		req.setAttribute("listAllVideoGames", listAllVideoGames);
 		redirect(req,resp);
 	}

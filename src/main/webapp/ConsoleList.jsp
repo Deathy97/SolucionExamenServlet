@@ -25,6 +25,7 @@
 				<tr>
 					<td>Name</td>
 					<td>Empresa</td>
+					<td><input type=""></td>
 				</tr>
 			</thead>
 			<c:forEach items="${consoles}" var="consoles">
