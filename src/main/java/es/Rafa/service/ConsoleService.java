@@ -31,6 +31,10 @@ public class ConsoleService {
 		
 	}
 	
+	public Console deleteConsole(HttpServletRequest req) {
+		repository.delete(req);
+	}
+	
 	public ConsoleRepository getRepository() {
 		return repository;
 	}

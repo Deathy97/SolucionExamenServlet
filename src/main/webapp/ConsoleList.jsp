@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-
 <%@ page import="java.io.*,java.util.*,es.Rafa.model.Console"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -32,6 +30,7 @@
 				<tr>
 					<td><c:out value="${consoles.name}" /></td>
 					<td><c:out value="${consoles.codCompany}" /></td>
+					<td><a href="/deleteConsole?name=${consoles.name}">Borrar</a></td>
 				</tr>
 			</c:forEach>
 		</table>

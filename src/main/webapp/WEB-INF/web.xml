@@ -34,7 +34,7 @@
 		<servlet-name>VideoGameDataListServlet</servlet-name>
 		<url-pattern>dataGames</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ConsoleDataListServlet</servlet-name>
 		<servlet-class>es.Rafa.servlet.ConsoleDataListServlet</servlet-class>
@@ -45,5 +45,24 @@
 		<url-pattern>dataConsoles</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>DeleteConsoleServlet</servlet-name>
+		<servlet-class>es.Rafa.servlet.DeleteConsoleServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DeleteConsoleServlet</servlet-name>
+		<url-pattern>deleteConsole</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DeleteVideoGameServlet</servlet-name>
+		<servlet-class>es.Rafa.servlet.DeleteVideoGameServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DeleteVideoGameServlet</servlet-name>
+		<url-pattern>deleteVideoGame</url-pattern>
+	</servlet-mapping>
 
 </web-app>

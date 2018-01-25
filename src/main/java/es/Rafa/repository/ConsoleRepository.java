@@ -125,6 +125,24 @@ public class ConsoleRepository {
 		return listGames;
 	}
 
+	public void delete(Console consoleName) {
+		Connection conn = null;
+		PreparedStatement preparedStatement = null;
+
+		try {
+			conn = connection.open(jdbcUrl);
+			preparedStatement = conn.prepareStatement("DELETE * FROM CONSOLE  WHERE name = ?");
+			preparedStatement.setString(1, consoleName.getName());
+			preparedStatement.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			close(preparedStatement);
+}
+	}
+
 	private void close(PreparedStatement prepareStatement) {
 		try {
 			prepareStatement.close();
@@ -142,5 +160,6 @@ public class ConsoleRepository {
 			throw new RuntimeException(e);
 		}
 	}
+
 
 }
