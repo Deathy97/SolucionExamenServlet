@@ -32,6 +32,4 @@ public class Company {
 		this.creationDate = creationDate;
 	}
 
-
-
 }

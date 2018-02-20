@@ -8,7 +8,7 @@ import es.Rafa.model.Company;
 
 public class CompanyAssembler {
 
-	public static Company assembleUserFrom(HttpServletRequest request) {
+	public static Company assembleCompanyFrom(HttpServletRequest request) {
 
 		Company company = new Company();
 		company.setName(request.getParameter("name"));

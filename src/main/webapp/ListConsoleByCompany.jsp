@@ -8,33 +8,32 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Consoles List</title>
+<title>Show list here</title>
 </head>
 <body>
-	<%
-		List<Console> consoles = (List<Console>) request.getAttribute("listAllConsoles");
-		pageContext.setAttribute("consoles", consoles);
-	%>
-
-	<form action="dataConsoles" method="post">
-
+	<form action="company" method="post">
+		<select name="selectCompany">
+			<c:forEach var="list" items="${listAllCompany}">
+				<option value="${list.id}">${list.name}</option>
+			</c:forEach>
+		</select> <input type="submit" value="Show Companies" />
+	</form>
+	<form action="listByConsole" method="post">
+		<input type="submit" value="show list" />
 		<table border="1">
 			<thead>
 				<tr>
 					<td>Name</td>
-					<td>Empresa</td>
 				</tr>
 			</thead>
-			<c:forEach items="${consoles}" var="consoles">
-				<tr>
-					<td><c:out value="${consoles.name}" /></td>
-					<td><c:out value="${consoles.codCompany}" /></td>
-					<td><a href="/deleteConsole?name=${consoles.name}">Delete</a></td>
-				</tr>
-			</c:forEach>
+			<tbody>
+				<c:forEach var="listAllConsole" items="${listAllConsoleByCompany}">
+					<tr>
+						<td><c:out value="${listAllConsole.name}" /></td>
+					</tr>
+				</c:forEach>
+			</tbody>
 		</table>
-		<input type="submit" value="Cargar tabla">
 	</form>
-
 </body>
 </html>

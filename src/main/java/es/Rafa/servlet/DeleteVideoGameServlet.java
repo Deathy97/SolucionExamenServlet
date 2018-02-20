@@ -7,16 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import es.Rafa.assembler.VideoGameAssembler;
+import es.Rafa.model.VideoGame;
 import es.Rafa.service.ConsoleService;
+import es.Rafa.service.VideoGameService;
 
 public class DeleteVideoGameServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
-	
+	private VideoGameService service = new VideoGameService();
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		VideoGame videoGameToDelete = VideoGameAssembler.assembleVideoGameForm(req);
+		service.deleteVideoGame(videoGameToDelete);
 		listRedirect(req, resp);
 	}
 
@@ -31,7 +35,8 @@ public class DeleteVideoGameServlet extends HttpServlet {
 		dispatcher.forward(req, resp);
 	}
 
-	private void confirmationRedirect(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	private void confirmationRedirect(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/confirmation.jsp");
 		dispatcher.forward(req, resp);
 	}

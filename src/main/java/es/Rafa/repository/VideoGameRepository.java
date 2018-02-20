@@ -129,6 +129,24 @@ public class VideoGameRepository {
 		return listGames;
 	}
 
+	public void delete(VideoGame videogame) {
+		Connection conn = null;
+		PreparedStatement preparedStatement = null;
+
+		try {
+			conn = connection.open(jdbcUrl);
+			preparedStatement = conn.prepareStatement("DELETE * FROM GAME  WHERE title = ?");
+			preparedStatement.setString(1, videogame.getTitle());
+			preparedStatement.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			close(preparedStatement);
+		}
+	}
+
 	private void close(PreparedStatement prepareStatement) {
 		try {
 			prepareStatement.close();

@@ -8,23 +8,26 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import es.Rafa.model.Company;
 import es.Rafa.model.Console;
-import es.Rafa.service.ConsoleService;
+import es.Rafa.service.CompanyService;
 
-public class ConsoleDataListServlet extends HttpServlet {
-
+public class ListConsoleByCompanyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private ConsoleService service = new ConsoleService();
+	private CompanyService service = new CompanyService();
 
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<Console> listAllConsoles = service.listAllConsoles();
-		req.setAttribute("listAllConsoles", listAllConsoles);
+		int id = Integer.parseInt(req.getParameter("selectCompany"));
+		List<Console> listConsoleByCompany = service.listAllByCompany(id);
+		req.setAttribute("listAllConsoleByCompany", listConsoleByCompany);
 		redirect(req, resp);
 	}
 
 	protected void redirect(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ConsoleList.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ListConsoleByCompany.jsp");
 		dispatcher.forward(req, resp);
 	}
 }

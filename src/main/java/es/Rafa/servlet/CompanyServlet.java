@@ -1,19 +1,18 @@
 package es.Rafa.servlet;
 
 import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import es.Rafa.service.VideoGameService;
+import es.Rafa.model.Company;
+import es.Rafa.service.CompanyService;
 
-public class VideoGamesServlet extends HttpServlet {
+public class CompanyServlet extends HttpServlet {
 
+	private CompanyService service = new CompanyService();
 	private static final long serialVersionUID = 1L;
-
-	VideoGameService service = new VideoGameService();
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doAction(req, resp);
@@ -24,21 +23,20 @@ public class VideoGamesServlet extends HttpServlet {
 	}
 
 	private void doAction(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		service.createNewVideoGameFromRequest(req);
+		service.createNewCompanyFromRequest(req);
 		redirect(req, resp);
 	}
 
 	protected void redirect(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/VideoGameList.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CompanyList.jsp");
 		dispatcher.forward(req, resp);
 	}
 
-	public VideoGameService getService() {
+	public CompanyService getService() {
 		return service;
 	}
 
-	public void setService(VideoGameService service) {
+	public void setService(CompanyService service) {
 		this.service = service;
 	}
-
 }

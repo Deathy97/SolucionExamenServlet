@@ -1,9 +1,7 @@
 package es.Rafa.service;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
 import es.Rafa.assembler.VideoGameAssembler;
 import es.Rafa.model.VideoGame;
 import es.Rafa.repository.VideoGameRepository;
@@ -25,12 +23,15 @@ public class VideoGameService {
 			repository.update(videoGameForm);
 		}
 	}
-	
-	public List<VideoGame> listAllVideoGames(){
+
+	public List<VideoGame> listAllVideoGames() {
 		return repository.searchAll();
-		
+
 	}
-	
+
+	public void deleteVideoGame(VideoGame videoGameToDelete) {
+		repository.delete(videoGameToDelete);
+	}
 
 	public VideoGameRepository getRepository() {
 		return repository;
@@ -40,4 +41,3 @@ public class VideoGameService {
 		this.repository = repository;
 	}
 }
-
