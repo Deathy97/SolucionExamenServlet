@@ -44,10 +44,8 @@ public class VideoGameRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			connection.close(preparedStatement);
+			close(preparedStatement);
 		}
-
-		connection.close(conn);
 	}
 
 	public void update(VideoGame videoGame) {
@@ -67,8 +65,7 @@ public class VideoGameRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			connection.close(preparedStatement);
-			connection.close(conn);
+			close(preparedStatement);
 		}
 	}
 
@@ -124,8 +121,6 @@ public class VideoGameRepository {
 			close(resultSet);
 			close(prepareStatement);
 		}
-
-		connection.close(conn);
 		return listGames;
 	}
 

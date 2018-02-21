@@ -70,10 +70,8 @@ public class ConsoleRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			connection.close(preparedStatement);
+			close(preparedStatement);
 		}
-
-		connection.close(conn);
 	}
 
 	public void update(Console console) {
@@ -92,8 +90,7 @@ public class ConsoleRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			connection.close(preparedStatement);
-			connection.close(conn);
+			close(preparedStatement);
 		}
 	}
 
@@ -109,7 +106,6 @@ public class ConsoleRepository {
 				Console consoleInDatabase = new Console();
 				consoleInDatabase.setName(resultSet.getString(1));
 				consoleInDatabase.setCodCompany(resultSet.getInt(2));
-
 				listGames.add(consoleInDatabase);
 			}
 
@@ -117,11 +113,9 @@ public class ConsoleRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(resultSet);
 			close(prepareStatement);
 		}
 
-		connection.close(conn);
 		return listGames;
 	}
 

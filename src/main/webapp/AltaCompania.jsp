@@ -9,9 +9,9 @@
 <body>
 <body>
 	<form action="company" method="post">
-		<span>name:</span> 
+		<span>Name: </span> 
 		<input type="text" name="name"/> <br/>
-		<span>creationDate:</span> 
+		<span>Creation Date: </span> 
 		<input type="date" name="creationDate"/><br/>
 		<input type="submit"/>
 	</form>

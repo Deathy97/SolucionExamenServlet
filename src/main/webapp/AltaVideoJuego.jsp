@@ -8,11 +8,11 @@
 </head>
 <body>
 	<form action="videogame" method="post">
-		<span>title:</span> 
+		<span>Title: </span> 
 		<input type="text" name="title"/> <br/>
-		<span>pegi:</span> 
+		<span>PEGI: </span> 
 		<input type="text" name="pegi"/><br/>
-		<span>releaseDate:</span> 
+		<span>Release Date: </span> 
 		<input type="date" name="releaseDate"/><br/>
 		<input type="submit"/>
 	</form>

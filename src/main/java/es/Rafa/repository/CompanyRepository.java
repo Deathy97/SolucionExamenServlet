@@ -52,9 +52,7 @@ public class CompanyRepository {
 		} finally {
 			close(resultSet);
 			close(prepareStatement);
-
 		}
-		connection.close(conn);
 		return companyInDatabase;
 	}
 
@@ -70,10 +68,8 @@ public class CompanyRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			connection.close(preparedStatement);
+			close(preparedStatement);
 		}
-
-		connection.close(conn);
 	}
 
 	public void update(Company companyForm) {
@@ -92,8 +88,7 @@ public class CompanyRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			connection.close(preparedStatement);
-			connection.close(conn);
+			close(preparedStatement);
 		}
 	}
 
@@ -109,8 +104,6 @@ public class CompanyRepository {
 				Company companyInDatabase = new Company();
 				companyInDatabase.setName(resultSet.getString(1));
 				companyInDatabase.setCreationDate(resultSet.getDate(2));
-				;
-
 				listCompany.add(companyInDatabase);
 			}
 
@@ -121,8 +114,6 @@ public class CompanyRepository {
 			close(resultSet);
 			close(prepareStatement);
 		}
-
-		connection.close(conn);
 		return listCompany;
 	}
 
