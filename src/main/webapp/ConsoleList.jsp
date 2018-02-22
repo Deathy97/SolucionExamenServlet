@@ -21,8 +21,8 @@
 		<table border="1">
 			<thead>
 				<tr>
-					<td>Name</td>
-					<td>Empresa</td>
+					<td>Name: </td>
+					<td>Company: </td>
 				</tr>
 			</thead>
 			<c:forEach items="${consoles}" var="consoles">

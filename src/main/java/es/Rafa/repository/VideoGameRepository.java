@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import es.Rafa.connection.AbstractConnection;
 import es.Rafa.model.VideoGame;
+import es.Rafa.service.VideoGameService;
 
 public class VideoGameRepository {
 
@@ -45,6 +46,7 @@ public class VideoGameRepository {
 			throw new RuntimeException(e);
 		} finally {
 			close(preparedStatement);
+			close(conn);
 		}
 	}
 
@@ -66,6 +68,7 @@ public class VideoGameRepository {
 			throw new RuntimeException(e);
 		} finally {
 			close(preparedStatement);
+			close(conn);
 		}
 	}
 
@@ -93,7 +96,7 @@ public class VideoGameRepository {
 			close(prepareStatement);
 
 		}
-		connection.close(conn);
+		close(conn);
 		return videoGameInDatabase;
 	}
 
@@ -121,6 +124,7 @@ public class VideoGameRepository {
 			close(resultSet);
 			close(prepareStatement);
 		}
+		close(conn);
 		return listGames;
 	}
 
@@ -139,12 +143,51 @@ public class VideoGameRepository {
 			throw new RuntimeException(e);
 		} finally {
 			close(preparedStatement);
+			close(conn);
 		}
 	}
 
 	private void close(PreparedStatement prepareStatement) {
 		try {
 			prepareStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+
+	public List<VideoGame> selectByCompany(int id) {
+
+		List<VideoGame> listVideoGame = new ArrayList<VideoGame>();
+		Connection conn = connection.open(jdbcUrl);
+		ResultSet resultSet = null;
+		PreparedStatement prepareStatement = null;
+		try {
+			prepareStatement = conn.prepareStatement("SELECT * FROM GAME WHERE companyID = ?");
+			prepareStatement.setString(1, id + "");
+			resultSet = prepareStatement.executeQuery();
+			while (resultSet.next()) {
+				VideoGame gameDB = new VideoGame();
+				gameDB.setTitle(resultSet.getString(1));
+				gameDB.setPegi(resultSet.getInt(2));
+				gameDB.setReleaseDate(resultSet.getDate(3));
+				listVideoGame.add(gameDB);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} finally {
+			close(resultSet);
+			close(prepareStatement);
+		}
+		close(conn);
+		return listVideoGame;
+	}
+
+	private void close(Connection conn) {
+		try {
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

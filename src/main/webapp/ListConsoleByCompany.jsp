@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Show list here</title>
+<title>Consoles By Company</title>
 </head>
 <body>
 	<form action="company" method="post">
@@ -23,7 +23,7 @@
 		<table border="1">
 			<thead>
 				<tr>
-					<td>Name</td>
+					<td>Name: </td>
 				</tr>
 			</thead>
 			<tbody>

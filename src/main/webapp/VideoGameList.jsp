@@ -30,7 +30,7 @@
 					<td><c:out value="${videogames.title}" /></td>
 					<td><c:out value="${videogames.pegi}" /></td>
 					<td><c:out value="${videogames.releaseDate}" /></td>
-					<td><a href="/deleteVideoGame?title=${videogames.title}">Borrar</a></td>
+					<td><a href="/deleteVideoGame?title=${videogames.title}">Delete</a></td>
 				</tr>
 			</c:forEach>
 		</table>

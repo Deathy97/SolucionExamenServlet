@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	version="3.1">
 	<display-name>Archetype Created Web Application</display-name>
-	
+
 	<servlet>
 		<servlet-name>CompanyServlet</servlet-name>
 		<servlet-class>es.Rafa.servlet.CompanyServlet</servlet-class>
@@ -14,7 +14,7 @@
 		<servlet-name>CompanyServlet</servlet-name>
 		<url-pattern>company</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ConsoleServlet</servlet-name>
 		<servlet-class>es.Rafa.servlet.ConsoleServlet</servlet-class>
@@ -84,6 +84,25 @@
 		<servlet-name>ListConsoleByCompanyServlet</servlet-name>
 		<url-pattern>listByConsole</url-pattern>
 	</servlet-mapping>
+<!--   -->
+	<servlet>
+		<servlet-name>VideoGameByCompany</servlet-name>
+		<servlet-class>es.Rafa.servlet.VideoGameByCompany</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>VideoGameByCompany</servlet-name>
+		<url-pattern>videoGameByCompany</url-pattern>
+	</servlet-mapping>
 
 
+	<servlet>
+		<servlet-name>ListCompanyGames</servlet-name>
+		<servlet-class>servlets.ListCompanyGames</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ListCompanyGames</servlet-name>
+		<url-pattern>listByVideoGame</url-pattern>
+	</servlet-mapping>
 </web-app>

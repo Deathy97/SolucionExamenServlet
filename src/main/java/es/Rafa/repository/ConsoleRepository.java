@@ -54,7 +54,7 @@ public class ConsoleRepository {
 			close(prepareStatement);
 
 		}
-		connection.close(conn);
+		close(conn);
 		return consoleInDatabase;
 	}
 
@@ -71,6 +71,7 @@ public class ConsoleRepository {
 			throw new RuntimeException(e);
 		} finally {
 			close(preparedStatement);
+			close(conn);
 		}
 	}
 
@@ -91,6 +92,7 @@ public class ConsoleRepository {
 			throw new RuntimeException(e);
 		} finally {
 			close(preparedStatement);
+			close(conn);
 		}
 	}
 
@@ -115,7 +117,7 @@ public class ConsoleRepository {
 		} finally {
 			close(prepareStatement);
 		}
-
+		close(conn);
 		return listGames;
 	}
 
@@ -134,6 +136,7 @@ public class ConsoleRepository {
 			throw new RuntimeException(e);
 		} finally {
 			close(preparedStatement);
+			close(conn);
 		}
 	}
 
@@ -160,13 +163,22 @@ public class ConsoleRepository {
 			close(prepareStatement);
 
 		}
-		connection.close(conn);
+		close(conn);
 		return listConsoles;
 	}
 
 	private void close(PreparedStatement prepareStatement) {
 		try {
 			prepareStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+
+	private void close(Connection conn) {
+		try {
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

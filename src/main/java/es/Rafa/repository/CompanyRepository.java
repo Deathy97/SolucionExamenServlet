@@ -52,6 +52,7 @@ public class CompanyRepository {
 		} finally {
 			close(resultSet);
 			close(prepareStatement);
+			close(conn);
 		}
 		return companyInDatabase;
 	}
@@ -69,6 +70,7 @@ public class CompanyRepository {
 			throw new RuntimeException(e);
 		} finally {
 			close(preparedStatement);
+			close(conn);
 		}
 	}
 
@@ -89,6 +91,7 @@ public class CompanyRepository {
 			throw new RuntimeException(e);
 		} finally {
 			close(preparedStatement);
+			close(conn);
 		}
 	}
 
@@ -113,6 +116,7 @@ public class CompanyRepository {
 		} finally {
 			close(resultSet);
 			close(prepareStatement);
+			close(conn);
 		}
 		return listCompany;
 	}
@@ -132,12 +136,22 @@ public class CompanyRepository {
 			throw new RuntimeException(e);
 		} finally {
 			close(preparedStatement);
+			close(conn);
 		}
 	}
 
 	private void close(PreparedStatement prepareStatement) {
 		try {
 			prepareStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+
+	private void close(Connection conn) {
+		try {
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

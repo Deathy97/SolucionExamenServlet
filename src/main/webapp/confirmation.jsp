@@ -14,15 +14,15 @@
 		<c:when test="${name != null}">
 		Are you sure to delete this console? 
 		<form action="deleteConsole" method="post">
-				<input type="text" value="${name}"/>
-				 <input type="submit" value="Yes"/>
+				<input type="text" value="${name}" /> <input type="submit"
+					value="Yes" />
 			</form>
 		</c:when>
 		<c:otherwise>
-		Are you sure to delete this videogame? 
+		Are you sure to delete this Video Game? 
       <form action="deleteVideoGame" method="post">
-				<input type="text" value="${title}"/> 
-				<input type="submit" value="Yes"/>
+				<input type="text" value="${title}" /> <input type="submit"
+					value="Yes" />
 			</form>
 		</c:otherwise>
 	</c:choose>

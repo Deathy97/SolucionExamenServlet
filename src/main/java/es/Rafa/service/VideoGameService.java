@@ -40,4 +40,8 @@ public class VideoGameService {
 	public void setRepository(VideoGameRepository repository) {
 		this.repository = repository;
 	}
+
+	public List<VideoGame> listAllByCompany(int id) {
+		return repository.selectByCompany(id);
+	}
 }

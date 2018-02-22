@@ -7,6 +7,7 @@ public class VideoGame {
 	private String title;
 	private Integer pegi;
 	private Date releaseDate;
+	private int companyID;
 
 	public String getTitle() {
 		return title;
@@ -31,5 +32,16 @@ public class VideoGame {
 	public void setReleaseDate(Date releaseDate) {
 		this.releaseDate = releaseDate;
 	}
+
+	public int getCompanyID() {
+		return companyID;
+	}
+
+	public void setCompanyID(int companyID) {
+		this.companyID = companyID;
+	}
+	
+	
+	
 
 }
