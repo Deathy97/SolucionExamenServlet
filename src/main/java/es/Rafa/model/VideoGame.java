@@ -7,7 +7,7 @@ public class VideoGame {
 	private String title;
 	private Integer pegi;
 	private Date releaseDate;
-	private int companyID;
+	private int companyId;
 
 	public String getTitle() {
 		return title;
@@ -33,12 +33,12 @@ public class VideoGame {
 		this.releaseDate = releaseDate;
 	}
 
-	public int getCompanyID() {
-		return companyID;
+	public int getCompanyId() {
+		return companyId;
 	}
 
-	public void setCompanyID(int companyID) {
-		this.companyID = companyID;
+	public void setCompanyId(int companyId) {
+		this.companyId = companyId;
 	}
 	
 	

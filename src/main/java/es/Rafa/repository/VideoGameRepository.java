@@ -86,7 +86,6 @@ public class VideoGameRepository {
 				videoGameInDatabase.setTitle(resultSet.getString(0));
 				videoGameInDatabase.setPegi(resultSet.getInt(2));
 				videoGameInDatabase.setReleaseDate(resultSet.getDate(3));
-
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -113,7 +112,6 @@ public class VideoGameRepository {
 				videoGameInDatabase.setTitle(resultSet.getString(1));
 				videoGameInDatabase.setPegi(resultSet.getInt(2));
 				videoGameInDatabase.setReleaseDate(resultSet.getDate(3));
-
 				listGames.add(videoGameInDatabase);
 			}
 

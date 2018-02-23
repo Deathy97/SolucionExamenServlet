@@ -52,7 +52,6 @@ public class ConsoleRepository {
 		} finally {
 			close(resultSet);
 			close(prepareStatement);
-
 		}
 		close(conn);
 		return consoleInDatabase;
