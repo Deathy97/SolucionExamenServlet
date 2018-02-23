@@ -25,7 +25,7 @@ public class ConsoleService {
 		}
 	}
 
-	public List<Console> listAllConsoles() {
+	public List<Console> listAllConsole() {
 		return repository.searchAll();
 
 	}

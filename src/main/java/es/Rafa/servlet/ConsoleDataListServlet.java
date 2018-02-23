@@ -18,8 +18,8 @@ public class ConsoleDataListServlet extends HttpServlet {
 	private ConsoleService service = new ConsoleService();
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<Console> listAllConsoles = service.listAllConsoles();
-		req.setAttribute("listAllConsoles", listAllConsoles);
+		List<Console> listAllConsole = service.listAllConsole();
+		req.setAttribute("listAllConsole", listAllConsole);
 		redirect(req, resp);
 	}
 

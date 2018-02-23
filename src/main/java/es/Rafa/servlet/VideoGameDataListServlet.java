@@ -18,8 +18,8 @@ public class VideoGameDataListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<VideoGame> listAllVideoGames = service.listAllVideoGames();
-		req.setAttribute("listAllVideoGames", listAllVideoGames);
+		List<VideoGame> listAllVideoGame = service.listAllVideoGame();
+		req.setAttribute("listAllVideoGame", listAllVideoGame);
 		redirect(req, resp);
 	}
 

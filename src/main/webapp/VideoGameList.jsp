@@ -12,8 +12,8 @@
 </head>
 <body>
 	<%
-		List<VideoGame> videogames = (List<VideoGame>) request.getAttribute("listAllVideoGames");
-		pageContext.setAttribute("videogames", videogames);
+		List<VideoGame> listVideoGame = (List<VideoGame>) request.getAttribute("listAllVideoGame");
+		pageContext.setAttribute("videoGame", listVideoGame);
 	%>
 
 	<form action="dataGames" method="post">
@@ -25,12 +25,12 @@
 					<td>Fecha de lanzamiento</td>
 				</tr>
 			</thead>
-			<c:forEach items="${videogames}" var="videogames">
+			<c:forEach items="${listVideoGame}" var="videoGame">
 				<tr>
-					<td><c:out value="${videogames.title}" /></td>
-					<td><c:out value="${videogames.pegi}" /></td>
-					<td><c:out value="${videogames.releaseDate}" /></td>
-					<td><a href="/deleteVideoGame?title=${videogames.title}">Delete</a></td>
+					<td><c:out value="${videoGame.title}" /></td>
+					<td><c:out value="${videoGame.pegi}" /></td>
+					<td><c:out value="${videoGame.releaseDate}" /></td>
+					<td><a href="/deleteVideoGame?title=${videoGame.title}">Delete</a></td>
 				</tr>
 			</c:forEach>
 		</table>

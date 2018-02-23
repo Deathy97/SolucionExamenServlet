@@ -100,7 +100,7 @@ public class VideoGameRepository {
 	}
 
 	public List<VideoGame> searchAll() {
-		List<VideoGame> listGames = new ArrayList<VideoGame>();
+		List<VideoGame> listGame = new ArrayList<VideoGame>();
 		Connection conn = connection.open(jdbcUrl);
 		ResultSet resultSet = null;
 		PreparedStatement prepareStatement = null;
@@ -112,7 +112,7 @@ public class VideoGameRepository {
 				videoGameInDatabase.setTitle(resultSet.getString(1));
 				videoGameInDatabase.setPegi(resultSet.getInt(2));
 				videoGameInDatabase.setReleaseDate(resultSet.getDate(3));
-				listGames.add(videoGameInDatabase);
+				listGame.add(videoGameInDatabase);
 			}
 
 		} catch (SQLException e) {
@@ -123,7 +123,7 @@ public class VideoGameRepository {
 			close(prepareStatement);
 		}
 		close(conn);
-		return listGames;
+		return listGame;
 	}
 
 	public void delete(VideoGame videogame) {

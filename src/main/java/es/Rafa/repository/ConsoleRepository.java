@@ -96,7 +96,7 @@ public class ConsoleRepository {
 	}
 
 	public List<Console> searchAll() {
-		List<Console> listGames = new ArrayList<Console>();
+		List<Console> listGame = new ArrayList<Console>();
 		Connection conn = connection.open(jdbcUrl);
 		ResultSet resultSet = null;
 		PreparedStatement prepareStatement = null;
@@ -107,7 +107,7 @@ public class ConsoleRepository {
 				Console consoleInDatabase = new Console();
 				consoleInDatabase.setName(resultSet.getString(1));
 				consoleInDatabase.setCodCompany(resultSet.getInt(2));
-				listGames.add(consoleInDatabase);
+				listGame.add(consoleInDatabase);
 			}
 
 		} catch (SQLException e) {
@@ -117,7 +117,7 @@ public class ConsoleRepository {
 			close(prepareStatement);
 		}
 		close(conn);
-		return listGames;
+		return listGame;
 	}
 
 	public void delete(Console console) {
@@ -140,7 +140,7 @@ public class ConsoleRepository {
 	}
 
 	public List<Console> selectByCompany(int id) {
-		List<Console> listConsoles = new ArrayList<Console>();
+		List<Console> listConsole = new ArrayList<Console>();
 		ResultSet resultSet = null;
 		PreparedStatement prepareStatement = null;
 		Connection conn = null;
@@ -152,7 +152,7 @@ public class ConsoleRepository {
 				Console consoleInDatabase = new Console();
 				consoleInDatabase.setName(resultSet.getString(1));
 				consoleInDatabase.setCodCompany(resultSet.getInt(2));
-				listConsoles.add(consoleInDatabase);
+				listConsole.add(consoleInDatabase);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -163,7 +163,7 @@ public class ConsoleRepository {
 
 		}
 		close(conn);
-		return listConsoles;
+		return listConsole;
 	}
 
 	private void close(PreparedStatement prepareStatement) {

@@ -6,35 +6,33 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Consoles List</title>
-</head>
-<body>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>List of consoles</title>
+	</head>
+	<body>
 	<%
-		List<Console> consoles = (List<Console>) request.getAttribute("listAllConsoles");
-		pageContext.setAttribute("consoles", consoles);
+		List<Console> listConsole = (List<Console>) request.getAttribute("listAllConsole");
+		pageContext.setAttribute("console", listConsole);
 	%>
-
-	<form action="dataConsoles" method="post">
-
-		<table border="1">
-			<thead>
-				<tr>
-					<td>Name: </td>
-					<td>Company: </td>
-				</tr>
-			</thead>
-			<c:forEach items="${consoles}" var="consoles">
-				<tr>
-					<td><c:out value="${consoles.name}" /></td>
-					<td><c:out value="${consoles.codCompany}" /></td>
-					<td><a href="/deleteConsole?name=${consoles.name}">Delete</a></td>
-				</tr>
-			</c:forEach>
-		</table>
-		<input type="submit" value="Cargar tabla">
-	</form>
-
-</body>
+	
+		<form action="dataConsoles" method="post">
+			<table border="1">
+				<thead>
+					<tr>
+						<td>Name: </td>
+						<td>Company: </td>
+					</tr>
+				</thead>
+				<c:forEach items="${listConsole}" var="console">
+					<tr>
+						<td><c:out value="${console.name}" /></td>
+						<td><c:out value="${console.codCompany}" /></td>
+						<td><a href="/deleteConsole?name=${console.name}">Delete</a></td>
+					</tr>
+				</c:forEach>
+			</table>
+			<input type="submit" value="Cargar tabla">
+		</form>
+	</body>
 </html>
