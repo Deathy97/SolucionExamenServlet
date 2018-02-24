@@ -20,5 +20,4 @@ public class Console {
 	public void setCodCompany(Integer codCompany) {
 		this.codCompany = codCompany;
 	}
-
 }

@@ -19,8 +19,9 @@
 			</c:when>
 			<c:otherwise>
 				Are you sure to delete this Video Game? 
-		      	<form action="deleteVideoGame" method="post">
-					<input type="text" value="${title}" /> <input type="submit" value="Yes" />
+			 	<form action="deleteVideoGame" method="post">
+					<input type="text" value="${title}" /> 
+					<input type="submit"value="Yes" />
 				</form>
 			</c:otherwise>
 		</c:choose>

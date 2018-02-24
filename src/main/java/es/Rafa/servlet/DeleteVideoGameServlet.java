@@ -6,10 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import es.Rafa.assembler.VideoGameAssembler;
 import es.Rafa.model.VideoGame;
-import es.Rafa.service.ConsoleService;
 import es.Rafa.service.VideoGameService;
 
 public class DeleteVideoGameServlet extends HttpServlet {
@@ -37,7 +35,7 @@ public class DeleteVideoGameServlet extends HttpServlet {
 
 	private void confirmationRedirect(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/confirmation.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Confirmation.jsp");
 		dispatcher.forward(req, resp);
 	}
 }

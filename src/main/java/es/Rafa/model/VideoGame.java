@@ -40,8 +40,4 @@ public class VideoGame {
 	public void setCompanyId(int companyId) {
 		this.companyId = companyId;
 	}
-	
-	
-	
-
 }

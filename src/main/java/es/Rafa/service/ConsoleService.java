@@ -1,7 +1,6 @@
 package es.Rafa.service;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import es.Rafa.assembler.ConsoleAssembler;
 import es.Rafa.model.Console;
@@ -27,7 +26,6 @@ public class ConsoleService {
 
 	public List<Console> listAllConsole() {
 		return repository.searchAll();
-
 	}
 
 	public void deleteConsole(Console console) {

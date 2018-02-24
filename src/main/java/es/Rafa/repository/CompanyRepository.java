@@ -77,15 +77,12 @@ public class CompanyRepository {
 	public void update(Company companyForm) {
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
-
 		try {
 			conn = connection.open(jdbcUrl);
-			preparedStatement = conn
-					.prepareStatement("UPDATE COMPANY SET " + "name = ?, creationDate = ? WHERE name = ?");
+			preparedStatement = conn.prepareStatement("UPDATE COMPANY SET " + "name = ?, creationDate = ? WHERE name = ?");
 			preparedStatement.setString(1, companyForm.getName());
 			preparedStatement.setDate(2, companyForm.getCreationDate());
 			preparedStatement.executeUpdate();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -109,7 +106,6 @@ public class CompanyRepository {
 				companyInDatabase.setCreationDate(resultSet.getDate(2));
 				listCompany.add(companyInDatabase);
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -124,13 +120,11 @@ public class CompanyRepository {
 	public void delete(Company company) {
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
-
 		try {
 			conn = connection.open(jdbcUrl);
 			preparedStatement = conn.prepareStatement("DELETE * FROM COMPANY  WHERE name = ?");
 			preparedStatement.setString(1, company.getName());
 			preparedStatement.executeUpdate();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);

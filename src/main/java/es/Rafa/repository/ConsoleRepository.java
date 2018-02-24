@@ -77,7 +77,6 @@ public class ConsoleRepository {
 	public void update(Console console) {
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
-
 		try {
 			conn = connection.open(jdbcUrl);
 			preparedStatement = conn
@@ -123,7 +122,6 @@ public class ConsoleRepository {
 	public void delete(Console console) {
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
-
 		try {
 			conn = connection.open(jdbcUrl);
 			preparedStatement = conn.prepareStatement("DELETE * FROM CONSOLE  WHERE name = ?");

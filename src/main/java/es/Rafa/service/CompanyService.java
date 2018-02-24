@@ -3,7 +3,6 @@ package es.Rafa.service;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import es.Rafa.assembler.CompanyAssembler;
-import es.Rafa.assembler.ConsoleAssembler;
 import es.Rafa.model.Company;
 import es.Rafa.model.Console;
 import es.Rafa.repository.CompanyRepository;

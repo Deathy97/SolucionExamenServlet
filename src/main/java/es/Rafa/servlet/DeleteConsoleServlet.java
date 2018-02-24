@@ -6,7 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import es.Rafa.assembler.ConsoleAssembler;
 import es.Rafa.model.Console;
 import es.Rafa.service.ConsoleService;
@@ -36,7 +35,7 @@ public class DeleteConsoleServlet extends HttpServlet {
 
 	private void confirmationRedirect(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/confirmation.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Confirmation.jsp");
 		dispatcher.forward(req, resp);
 	}
 

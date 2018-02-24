@@ -26,7 +26,6 @@ public class VideoGameService {
 
 	public List<VideoGame> listAllVideoGame() {
 		return repository.searchAll();
-
 	}
 
 	public void deleteVideoGame(VideoGame videoGameToDelete) {

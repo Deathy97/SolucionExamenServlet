@@ -31,5 +31,4 @@ public class Company {
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
-
 }

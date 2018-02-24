@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import es.Rafa.connection.AbstractConnection;
 import es.Rafa.model.VideoGame;
-import es.Rafa.service.VideoGameService;
 
 public class VideoGameRepository {
 
@@ -53,7 +52,6 @@ public class VideoGameRepository {
 	public void update(VideoGame videoGame) {
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
-
 		try {
 			conn = connection.open(jdbcUrl);
 			preparedStatement = conn
@@ -62,7 +60,6 @@ public class VideoGameRepository {
 			preparedStatement.setInt(2, videoGame.getPegi());
 			preparedStatement.setDate(3, videoGame.getReleaseDate());
 			preparedStatement.executeUpdate();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -114,7 +111,6 @@ public class VideoGameRepository {
 				videoGameInDatabase.setReleaseDate(resultSet.getDate(3));
 				listGame.add(videoGameInDatabase);
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -129,13 +125,11 @@ public class VideoGameRepository {
 	public void delete(VideoGame videogame) {
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
-
 		try {
 			conn = connection.open(jdbcUrl);
 			preparedStatement = conn.prepareStatement("DELETE * FROM GAME  WHERE title = ?");
 			preparedStatement.setString(1, videogame.getTitle());
 			preparedStatement.executeUpdate();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -145,17 +139,7 @@ public class VideoGameRepository {
 		}
 	}
 
-	private void close(PreparedStatement prepareStatement) {
-		try {
-			prepareStatement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-	}
-
 	public List<VideoGame> selectByCompany(int id) {
-
 		List<VideoGame> listVideoGame = new ArrayList<VideoGame>();
 		Connection conn = connection.open(jdbcUrl);
 		ResultSet resultSet = null;
@@ -165,13 +149,12 @@ public class VideoGameRepository {
 			prepareStatement.setString(1, id + "");
 			resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
-				VideoGame gameDB = new VideoGame();
-				gameDB.setTitle(resultSet.getString(1));
-				gameDB.setPegi(resultSet.getInt(2));
-				gameDB.setReleaseDate(resultSet.getDate(3));
-				listVideoGame.add(gameDB);
+				VideoGame gameDb = new VideoGame();
+				gameDb.setTitle(resultSet.getString(1));
+				gameDb.setPegi(resultSet.getInt(2));
+				gameDb.setReleaseDate(resultSet.getDate(3));
+				listVideoGame.add(gameDb);
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -181,6 +164,15 @@ public class VideoGameRepository {
 		}
 		close(conn);
 		return listVideoGame;
+	}
+
+	private void close(PreparedStatement prepareStatement) {
+		try {
+			prepareStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
 	}
 
 	private void close(Connection conn) {
