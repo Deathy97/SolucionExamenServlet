@@ -30,7 +30,8 @@ public class CompanyRepository {
 	};
 
 	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/Console.sql'";
-
+	public CloseConnection closeConnection = new CloseConnection();
+	
 	public Company search(Company companyForm) {
 		Company companyInDatabase = null;
 		ResultSet resultSet = null;
@@ -50,9 +51,9 @@ public class CompanyRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(resultSet);
-			close(prepareStatement);
-			close(conn);
+			closeConnection.close(resultSet);
+			closeConnection.close(prepareStatement);
+			closeConnection.close(conn);
 		}
 		return companyInDatabase;
 	}
@@ -69,8 +70,8 @@ public class CompanyRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(preparedStatement);
-			close(conn);
+			closeConnection.close(preparedStatement);
+			closeConnection.close(conn);
 		}
 	}
 
@@ -87,8 +88,8 @@ public class CompanyRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(preparedStatement);
-			close(conn);
+			closeConnection.close(preparedStatement);
+			closeConnection.close(conn);
 		}
 	}
 
@@ -110,9 +111,9 @@ public class CompanyRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(resultSet);
-			close(prepareStatement);
-			close(conn);
+			closeConnection.close(resultSet);
+			closeConnection.close(prepareStatement);
+			closeConnection.close(conn);
 		}
 		return listCompany;
 	}
@@ -129,35 +130,8 @@ public class CompanyRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(preparedStatement);
-			close(conn);
-		}
-	}
-
-	private void close(PreparedStatement prepareStatement) {
-		try {
-			prepareStatement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-	}
-
-	private void close(Connection conn) {
-		try {
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-	}
-
-	private void close(ResultSet resultSet) {
-		try {
-			resultSet.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
+			closeConnection.close(preparedStatement);
+			closeConnection.close(conn);
 		}
 	}
 }

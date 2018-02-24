@@ -30,6 +30,7 @@ public class ConsoleRepository {
 	};
 
 	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/Console.sql'";
+	public CloseConnection closeConnection = new CloseConnection();
 
 	public Console search(Console consoleForm) {
 		Console consoleInDatabase = null;
@@ -50,10 +51,11 @@ public class ConsoleRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(resultSet);
-			close(prepareStatement);
+			closeConnection.close(resultSet);
+			closeConnection.close(prepareStatement);
+			closeConnection.close(conn);
 		}
-		close(conn);
+
 		return consoleInDatabase;
 	}
 
@@ -69,8 +71,8 @@ public class ConsoleRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(preparedStatement);
-			close(conn);
+			closeConnection.close(preparedStatement);
+			closeConnection.close(conn);
 		}
 	}
 
@@ -79,18 +81,16 @@ public class ConsoleRepository {
 		PreparedStatement preparedStatement = null;
 		try {
 			conn = connection.open(jdbcUrl);
-			preparedStatement = conn
-					.prepareStatement("UPDATE CONSOLE SET " + "name = ?, codCompany = ? WHERE name = ?");
+			preparedStatement = conn.prepareStatement("UPDATE CONSOLE SET " + "name = ?, codCompany = ? WHERE name = ?");
 			preparedStatement.setString(1, console.getName());
 			preparedStatement.setInt(2, console.getCodCompany());
 			preparedStatement.executeUpdate();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(preparedStatement);
-			close(conn);
+			closeConnection.close(preparedStatement);
+			closeConnection.close(conn);
 		}
 	}
 
@@ -108,14 +108,14 @@ public class ConsoleRepository {
 				consoleInDatabase.setCodCompany(resultSet.getInt(2));
 				listGame.add(consoleInDatabase);
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(prepareStatement);
+			closeConnection.close(prepareStatement);
+			closeConnection.close(conn);
 		}
-		close(conn);
+
 		return listGame;
 	}
 
@@ -127,13 +127,12 @@ public class ConsoleRepository {
 			preparedStatement = conn.prepareStatement("DELETE * FROM CONSOLE  WHERE name = ?");
 			preparedStatement.setString(1, console.getName());
 			preparedStatement.executeUpdate();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(preparedStatement);
-			close(conn);
+			closeConnection.close(preparedStatement);
+			closeConnection.close(conn);
 		}
 	}
 
@@ -156,39 +155,9 @@ public class ConsoleRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(resultSet);
-			close(prepareStatement);
-
+			closeConnection.close(prepareStatement);
+			closeConnection.close(conn);
 		}
-		close(conn);
 		return listConsole;
 	}
-
-	private void close(PreparedStatement prepareStatement) {
-		try {
-			prepareStatement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-	}
-
-	private void close(Connection conn) {
-		try {
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-	}
-
-	private void close(ResultSet resultSet) {
-		try {
-			resultSet.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-	}
-
 }

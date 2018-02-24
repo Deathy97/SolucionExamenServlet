@@ -29,8 +29,10 @@ public class VideoGameRepository {
 		}
 	};
 
-	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/VideoGame.sql'";
 
+	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/VideoGame.sql'";
+	public CloseConnection closeConnection = new CloseConnection();
+	
 	public void insert(VideoGame gameForm) {
 		Connection conn = connection.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
@@ -44,8 +46,8 @@ public class VideoGameRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(preparedStatement);
-			close(conn);
+			closeConnection.close(preparedStatement);
+			closeConnection.close(conn);
 		}
 	}
 
@@ -54,8 +56,7 @@ public class VideoGameRepository {
 		PreparedStatement preparedStatement = null;
 		try {
 			conn = connection.open(jdbcUrl);
-			preparedStatement = conn
-					.prepareStatement("UPDATE GAME SET " + "title = ?, pegi = ?, releaseDate = ? WHERE title = ?");
+			preparedStatement = conn.prepareStatement("UPDATE GAME SET " + "title = ?, pegi = ?, releaseDate = ? WHERE title = ?");
 			preparedStatement.setString(1, videoGame.getTitle());
 			preparedStatement.setInt(2, videoGame.getPegi());
 			preparedStatement.setDate(3, videoGame.getReleaseDate());
@@ -64,8 +65,8 @@ public class VideoGameRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(preparedStatement);
-			close(conn);
+			closeConnection.close(preparedStatement);
+			closeConnection.close(conn);
 		}
 	}
 
@@ -88,11 +89,10 @@ public class VideoGameRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(resultSet);
-			close(prepareStatement);
-
+			closeConnection.close(resultSet);
+			closeConnection.close(prepareStatement);
+			closeConnection.close(conn);
 		}
-		close(conn);
 		return videoGameInDatabase;
 	}
 
@@ -115,10 +115,11 @@ public class VideoGameRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(resultSet);
-			close(prepareStatement);
+			closeConnection.close(resultSet);
+			closeConnection.close(prepareStatement);
+			closeConnection.close(conn);
 		}
-		close(conn);
+
 		return listGame;
 	}
 
@@ -134,8 +135,8 @@ public class VideoGameRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(preparedStatement);
-			close(conn);
+			closeConnection.close(preparedStatement);
+			closeConnection.close(conn);
 		}
 	}
 
@@ -159,38 +160,10 @@ public class VideoGameRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			close(resultSet);
-			close(prepareStatement);
+			closeConnection.close(resultSet);
+			closeConnection.close(prepareStatement);
+			closeConnection.close(conn);
 		}
-		close(conn);
 		return listVideoGame;
 	}
-
-	private void close(PreparedStatement prepareStatement) {
-		try {
-			prepareStatement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-	}
-
-	private void close(Connection conn) {
-		try {
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-	}
-
-	private void close(ResultSet resultSet) {
-		try {
-			resultSet.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-	}
-
 }
