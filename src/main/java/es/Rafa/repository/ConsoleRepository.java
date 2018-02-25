@@ -30,7 +30,6 @@ public class ConsoleRepository {
 	};
 
 	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/Console.sql'";
-	public CloseConnection closeConnection = new CloseConnection();
 
 	public Console search(Console consoleForm) {
 		Console consoleInDatabase = null;
@@ -51,9 +50,9 @@ public class ConsoleRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			closeConnection.close(resultSet);
-			closeConnection.close(prepareStatement);
-			closeConnection.close(conn);
+			Utilities.close(resultSet);
+			Utilities.close(prepareStatement);
+			Utilities.close(conn);
 		}
 
 		return consoleInDatabase;
@@ -71,8 +70,8 @@ public class ConsoleRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			closeConnection.close(preparedStatement);
-			closeConnection.close(conn);
+			Utilities.close(preparedStatement);
+			Utilities.close(conn);
 		}
 	}
 
@@ -89,8 +88,8 @@ public class ConsoleRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			closeConnection.close(preparedStatement);
-			closeConnection.close(conn);
+			Utilities.close(preparedStatement);
+			Utilities.close(conn);
 		}
 	}
 
@@ -112,8 +111,8 @@ public class ConsoleRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			closeConnection.close(prepareStatement);
-			closeConnection.close(conn);
+			Utilities.close(prepareStatement);
+			Utilities.close(conn);
 		}
 
 		return listGame;
@@ -131,8 +130,8 @@ public class ConsoleRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			closeConnection.close(preparedStatement);
-			closeConnection.close(conn);
+			Utilities.close(preparedStatement);
+			Utilities.close(conn);
 		}
 	}
 
@@ -155,8 +154,8 @@ public class ConsoleRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			closeConnection.close(prepareStatement);
-			closeConnection.close(conn);
+			Utilities.close(prepareStatement);
+			Utilities.close(conn);
 		}
 		return listConsole;
 	}

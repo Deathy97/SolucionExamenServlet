@@ -30,7 +30,6 @@ public class CompanyRepository {
 	};
 
 	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/Console.sql'";
-	public CloseConnection closeConnection = new CloseConnection();
 	
 	public Company search(Company companyForm) {
 		Company companyInDatabase = null;
@@ -51,9 +50,9 @@ public class CompanyRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			closeConnection.close(resultSet);
-			closeConnection.close(prepareStatement);
-			closeConnection.close(conn);
+			Utilities.close(resultSet);
+			Utilities.close(prepareStatement);
+			Utilities.close(conn);
 		}
 		return companyInDatabase;
 	}
@@ -70,8 +69,8 @@ public class CompanyRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			closeConnection.close(preparedStatement);
-			closeConnection.close(conn);
+			Utilities.close(preparedStatement);
+			Utilities.close(conn);
 		}
 	}
 
@@ -88,8 +87,8 @@ public class CompanyRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			closeConnection.close(preparedStatement);
-			closeConnection.close(conn);
+			Utilities.close(preparedStatement);
+			Utilities.close(conn);
 		}
 	}
 
@@ -111,9 +110,9 @@ public class CompanyRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			closeConnection.close(resultSet);
-			closeConnection.close(prepareStatement);
-			closeConnection.close(conn);
+			Utilities.close(resultSet);
+			Utilities.close(prepareStatement);
+			Utilities.close(conn);
 		}
 		return listCompany;
 	}
@@ -130,8 +129,8 @@ public class CompanyRepository {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		} finally {
-			closeConnection.close(preparedStatement);
-			closeConnection.close(conn);
+			Utilities.close(preparedStatement);
+			Utilities.close(conn);
 		}
 	}
 }

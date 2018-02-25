@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CloseConnection {
+public class Utilities {
 	
-	public void close(PreparedStatement prepareStatement) {
+	public static void close(PreparedStatement prepareStatement) {
 		try {
 			prepareStatement.close();
 		} catch (SQLException e) {
@@ -16,7 +16,7 @@ public class CloseConnection {
 		}
 	}
 
-	public void close(Connection conn) {
+	public static void close(Connection conn) {
 		try {
 			conn.close();
 		} catch (SQLException e) {
@@ -25,7 +25,7 @@ public class CloseConnection {
 		}
 	}
 
-	public void close(ResultSet resultSet) {
+	public static void close(ResultSet resultSet) {
 		try {
 			resultSet.close();
 		} catch (SQLException e) {
