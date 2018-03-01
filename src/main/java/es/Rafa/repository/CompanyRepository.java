@@ -1,136 +1,57 @@
 package es.Rafa.repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import es.Rafa.connection.AbstractConnection;
+import org.apache.logging.log4j.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import es.Rafa.model.Company;
 
 public class CompanyRepository {
 
-	private AbstractConnection connection = new AbstractConnection() {
+	private static final String SELECT = "SELECT * FROM COMPANY";
+	private static final String INSERT = "INSERT INTO COMPANY (name,creationDate) VALUES (:name, :creationDate)";
+	private static final String DELETE = "DELETE * FROM COMPANY WHERE name = :name";
+	private static final String SELECTBYNAME = "SELECT * FROM CONSOLE WHERE name = :name";
 
-		@Override
-		public String getDriver() {
-			return "org.h2.Driver";
-		}
+	private static Logger log = LogManager.getLogger(CompanyRepository.class);
 
-		@Override
-		public String getDatabaseUser() {
-			return "sa";
-		}
+	@Autowired
+	private JdbcTemplate template;
 
-		@Override
-		public String getDatabasePassword() {
-			return "";
-		}
-	};
+	@Autowired
+	private NamedParameterJdbcTemplate namedJdbcTemplate;
 
-	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/Console.sql'";
-	
-	public Company search(Company companyForm) {
-		Company companyInDatabase = null;
-		ResultSet resultSet = null;
-		PreparedStatement prepareStatement = null;
-		Connection conn = null;
-		try {
-			conn = connection.open(jdbcUrl);
-			prepareStatement = conn.prepareStatement("SELECT * FROM COMPANY WHERE name = ?");
-			prepareStatement.setString(1, companyForm.getName());
-			resultSet = prepareStatement.executeQuery();
-			while (resultSet.next()) {
-				companyInDatabase = new Company();
-				companyInDatabase.setName(resultSet.getString(0));
-				companyInDatabase.setCreationDate(resultSet.getDate(1));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			Utilities.close(resultSet);
-			Utilities.close(prepareStatement);
-			Utilities.close(conn);
-		}
-		return companyInDatabase;
-	}
-
-	public void insert(Company companyForm) {
-		Connection conn = connection.open(jdbcUrl);
-		PreparedStatement preparedStatement = null;
-		try {
-			preparedStatement = conn.prepareStatement("INSERT INTO COMPANY (name,creationDate)" + "VALUES (?, ?)");
-			preparedStatement.setString(1, companyForm.getName());
-			preparedStatement.setDate(2, companyForm.getCreationDate());
-			preparedStatement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			Utilities.close(preparedStatement);
-			Utilities.close(conn);
-		}
-	}
-
-	public void update(Company companyForm) {
-		Connection conn = null;
-		PreparedStatement preparedStatement = null;
-		try {
-			conn = connection.open(jdbcUrl);
-			preparedStatement = conn.prepareStatement("UPDATE COMPANY SET " + "name = ?, creationDate = ? WHERE name = ?");
-			preparedStatement.setString(1, companyForm.getName());
-			preparedStatement.setDate(2, companyForm.getCreationDate());
-			preparedStatement.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			Utilities.close(preparedStatement);
-			Utilities.close(conn);
-		}
-	}
-
-	public List<Company> searchAll() {
-		List<Company> listCompany = new ArrayList<Company>();
-		Connection conn = connection.open(jdbcUrl);
-		ResultSet resultSet = null;
-		PreparedStatement prepareStatement = null;
-		try {
-			prepareStatement = conn.prepareStatement("SELECT * FROM COMPANY");
-			resultSet = prepareStatement.executeQuery();
-			while (resultSet.next()) {
-				Company companyInDatabase = new Company();
-				companyInDatabase.setName(resultSet.getString(1));
-				companyInDatabase.setCreationDate(resultSet.getDate(2));
-				listCompany.add(companyInDatabase);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			Utilities.close(resultSet);
-			Utilities.close(prepareStatement);
-			Utilities.close(conn);
-		}
+	public List<Company> search(Company company) {
+		log.debug("Consulta ejecutada" + SELECTBYNAME);
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("name", company.getName());
+		namedJdbcTemplate.update(SELECTBYNAME, params);
+		List<Company> listCompany = template.query(SELECTBYNAME, new BeanPropertyRowMapper(Company.class));
 		return listCompany;
 	}
 
-	public void delete(Company company) {
-		Connection conn = null;
-		PreparedStatement preparedStatement = null;
-		try {
-			conn = connection.open(jdbcUrl);
-			preparedStatement = conn.prepareStatement("DELETE * FROM COMPANY  WHERE name = ?");
-			preparedStatement.setString(1, company.getName());
-			preparedStatement.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		} finally {
-			Utilities.close(preparedStatement);
-			Utilities.close(conn);
-		}
+	public List<Company> searchAll() {
+		log.debug("Ejecutando la consulta: " + SELECT);
+		List<Company> listCompany = template.query(SELECT, new BeanPropertyRowMapper(Company.class));
+		return listCompany;
 	}
+
+	public void insert(Company company) {
+		log.debug("Ejecutando la consulta: " + INSERT);
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("name", company.getName());
+		params.addValue("creationDate", company.getCreationDate());
+		namedJdbcTemplate.update(INSERT, params);
+	}
+
+	public void delete(Company company) {
+		log.debug("Ejecutando la consulta: " + DELETE);
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("name", company.getName());
+		namedJdbcTemplate.update(DELETE, params);
+	}
+
 }

@@ -1,48 +1,34 @@
 package es.Rafa.service;
 
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import es.Rafa.assembler.CompanyAssembler;
+import org.apache.logging.log4j.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import es.Rafa.model.Company;
-import es.Rafa.model.Console;
 import es.Rafa.repository.CompanyRepository;
 
+@Service
 public class CompanyService {
 
-	CompanyAssembler assembler = new CompanyAssembler();
-	private CompanyRepository repository = new CompanyRepository();
+	private static Logger log = LogManager.getLogger(CompanyService.class);
 
-	public Company assembleUserFromRequest(HttpServletRequest req) {
-		return CompanyAssembler.assembleCompanyFrom(req);
+	@Autowired
+	private CompanyRepository repository;
+
+	public void insert(Company company) {
+		log.debug("Insertando la empresa " + company.getName());
+		repository.insert(company);
 	}
 
-	public void createNewCompanyFromRequest(HttpServletRequest req) {
-		Company company = CompanyAssembler.assembleCompanyFrom(req);
-		insertOrUpdate(company);
+	public void delete(Company company) {
+		log.debug("Borrando la empresa " + company.getName());
+		repository.delete(company);
+		;
 	}
 
-	public void insertOrUpdate(Company companyForm) {
-		Company companyInDatabase = repository.search(companyForm);
-		if (null == companyInDatabase) {
-			repository.insert(companyForm);
-		} else {
-			repository.update(companyForm);
-		}
-	}
-
-	public List<Company> listAllCompany() {
+	public List<Company> listAll() {
+		log.debug("Listando todas las empresas...");
 		return repository.searchAll();
 	}
 
-	public CompanyRepository getRepository() {
-		return repository;
-	}
-
-	public void setRepository(CompanyRepository repository) {
-		this.repository = repository;
-	}
-
-	public List<Console> listAllByCompany(int id) {
-		return null;
-	}
 }

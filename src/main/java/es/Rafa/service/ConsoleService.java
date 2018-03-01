@@ -2,41 +2,38 @@ package es.Rafa.service;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import es.Rafa.assembler.ConsoleAssembler;
+import org.apache.logging.log4j.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import es.Rafa.model.Console;
 import es.Rafa.repository.ConsoleRepository;
 
+@Service
 public class ConsoleService {
 
-	private ConsoleRepository repository = new ConsoleRepository();
+	private static Logger log = LogManager.getLogger(ConsoleService.class);
 
-	public void createNewConsoleFromRequest(HttpServletRequest req) {
-		Console console = ConsoleAssembler.assembleConsoleFrom(req);
-		insertOrUpdate(console);
+	@Autowired
+	private ConsoleRepository repository;
+
+	public void insert(Console console) {
+		log.debug("Insertando la consola " + console.getName());
+		repository.insert(console);
 	}
 
-	public void insertOrUpdate(Console consoleFrom) {
-		Console consoleInDatabase = repository.search(consoleFrom);
-		if (null == consoleInDatabase) {
-			repository.insert(consoleFrom);
-		} else {
-			repository.update(consoleFrom);
-		}
-	}
-
-	public List<Console> listAllConsole() {
-		return repository.searchAll();
-	}
-
-	public void deleteConsole(Console console) {
+	public void delete(Console console) {
+		log.debug("Borrando la consola " + console.getName());
 		repository.delete(console);
 	}
 
-	public ConsoleRepository getRepository() {
-		return repository;
+	public List<Console> listAll() {
+		log.debug("Listando todas las consolas...");
+		return repository.searchAll();
 	}
 
-	public void setRepository(ConsoleRepository repository) {
-		this.repository = repository;
+	public List<Console> listByCompany(String companyName) {
+		log.debug("Listando todas las consolas de la empresa " + companyName);
+		return repository.searchByCompany(companyName);
 	}
+
 }

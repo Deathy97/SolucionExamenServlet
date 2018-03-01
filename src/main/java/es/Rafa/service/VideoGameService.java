@@ -2,45 +2,48 @@ package es.Rafa.service;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import es.Rafa.assembler.VideoGameAssembler;
+import org.apache.logging.log4j.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import es.Rafa.model.VideoGame;
 import es.Rafa.repository.VideoGameRepository;
 
+@Service
 public class VideoGameService {
 
-	private VideoGameRepository repository = new VideoGameRepository();
+	private static Logger log = LogManager.getLogger(VideoGameService.class);
 
-	public void createNewVideoGameFromRequest(HttpServletRequest req) {
-		VideoGame videoGame = VideoGameAssembler.assembleVideoGameForm(req);
-		insertOrUpdate(videoGame);
+	@Autowired
+	private VideoGameRepository repository;
+
+	public void insert(VideoGame videogame) {
+		log.debug("Insertando el videojuego " + videogame.getTitle());
+		repository.insert(videogame);
 	}
 
-	public void insertOrUpdate(VideoGame videoGameForm) {
-		VideoGame videoGameInDatabase = repository.search(videoGameForm);
-		if (null == videoGameInDatabase) {
-			repository.insert(videoGameForm);
-		} else {
-			repository.update(videoGameForm);
-		}
+	public void delete(VideoGame videogame) {
+		log.debug("Borrando el videojuego " + videogame.getTitle());
+		repository.delete(videogame);
 	}
 
-	public List<VideoGame> listAllVideoGame() {
+	public List<VideoGame> listAll() {
+		log.debug("Listando todos los videojuegos...");
 		return repository.searchAll();
 	}
 
-	public void deleteVideoGame(VideoGame videoGameToDelete) {
-		repository.delete(videoGameToDelete);
+	public List<VideoGame> listByRecommendedAge(String recommendedAge) {
+		log.debug("Listando videojuegos de edad recomendada " + recommendedAge);
+		return repository.searchByRecommendedAge(recommendedAge);
 	}
 
-	public VideoGameRepository getRepository() {
-		return repository;
+	public List<VideoGame> listByConsole(String consoleName) {
+		log.debug("Listando videojuegos para la consola " + consoleName);
+		return repository.searchByConsole(consoleName);
 	}
 
-	public void setRepository(VideoGameRepository repository) {
-		this.repository = repository;
+	public List<VideoGame> order(String recommendedAge, String order) {
+		log.debug("Ordenando videojuegos de edad recomendada " + recommendedAge);
+		return repository.orderBy(recommendedAge, order);
 	}
 
-	public List<VideoGame> listAllByCompany(int id) {
-		return repository.selectByCompany(id);
-	}
 }

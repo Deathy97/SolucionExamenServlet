@@ -9,9 +9,9 @@
 	<body>
 		<form action="console" method="post">
 			<span>Name: </span> 
-			<input type="text" name="name"/> <br/>
+			<input type="text" path="name"/> <br/>
 			<span>Company Code: </span> 
-			<input type="text" name="codCompany"/><br/>
+			<input type="text" path="codCompany"/><br/>
 			<input type="submit"/>
 		</form>
 	</body>
